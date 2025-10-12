@@ -260,6 +260,25 @@ document.querySelectorAll('.feature-card').forEach((card, index) => {
 
 // Showcase content slide-in animations
 document.querySelectorAll('.showcase-content').forEach((content, index) => {
+    // Skip the first showcase (Productivity section)
+    if (index === 0) {
+        // Set to visible immediately without animation
+        const textElement = content.querySelector('.showcase-text');
+        const visualElement = content.querySelector('.showcase-visual');
+        
+        if (textElement) {
+            textElement.style.opacity = '1';
+            textElement.style.transform = 'none';
+        }
+        
+        if (visualElement) {
+            visualElement.style.opacity = '1';
+            visualElement.style.transform = 'none';
+        }
+        return;
+    }
+    
+    // For other sections, keep the animation
     const textElement = content.querySelector('.showcase-text');
     const visualElement = content.querySelector('.showcase-visual');
     
@@ -293,6 +312,22 @@ document.querySelectorAll('.showcase-content').forEach((content, index) => {
         visualElement.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
         
         showcaseObserver.observe(content);
+    }
+});
+
+// Remove parallax from the first showcase image
+document.querySelectorAll('.showcase-visual img').forEach((img, index) => {
+    if (index === 0) {
+        img.style.transform = 'none';
+    }
+});
+
+// Remove image observer for the first showcase image
+document.querySelectorAll('.showcase-visual img').forEach((img, index) => {
+    if (index === 0) {
+        img.classList.add('image-visible');
+    } else {
+        imageObserver.observe(img);
     }
 });
 

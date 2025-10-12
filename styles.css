@@ -778,16 +778,15 @@ body {
 
 /* Advanced Image Animations */
 .showcase-visual img {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, opacity;
+    opacity: 1;
+    transform: none;
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
+/* Keep hover effects but remove entrance animation */
 .showcase-visual img.image-visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    /* No additional styles needed */
 }
 
 .showcase-visual {
@@ -915,5 +914,31 @@ html {
     .showcase-visual {
         opacity: 1 !important;
         transform: none !important;
+    }
+}
+
+/* EyeGlass Animation */
+.animate-eyeglass {
+    display: inline-block;
+    position: relative;
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    background: linear-gradient(135deg, #000000 0%, #333333 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-weight: 700;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
