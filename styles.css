@@ -775,3 +775,145 @@ body {
         width: 100%;
     }
 }
+
+/* Advanced Image Animations */
+.showcase-visual img {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.showcase-visual img.image-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.showcase-visual {
+    overflow: hidden;
+    border-radius: 24px;
+    position: relative;
+}
+
+.showcase-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 24px;
+}
+
+.showcase-visual:hover::before {
+    opacity: 1;
+}
+
+/* Smooth reveal animations */
+.showcase-text {
+    will-change: transform, opacity;
+}
+
+/* Enhanced feature cards */
+.feature-card {
+    will-change: transform, opacity;
+    transform-origin: center;
+}
+
+/* Gradient overlay on images */
+.showcase-visual img {
+    position: relative;
+    display: block;
+}
+
+/* Parallax container */
+.showcase {
+    overflow: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+.showcase-visual img,
+.feature-card,
+.showcase-text {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Loading state */
+body:not(.loaded) .showcase-visual img {
+    opacity: 0;
+}
+
+/* Image glow effect on hover */
+.showcase-visual img {
+    filter: brightness(1);
+    transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.showcase-visual:hover img {
+    filter: brightness(1.05);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Staggered animation delays */
+.showcase-features li {
+    will-change: transform, opacity;
+}
+
+/* Hero section enhancements */
+.hero-title-line {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+/* Progress bar styling */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Image container improvements */
+.showcase-content {
+    perspective: 1000px;
+}
+
+/* Enhanced shadows for depth */
+.showcase-visual {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.showcase-visual:hover {
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive image animations */
+@media (max-width: 768px) {
+    .showcase-visual img {
+        transform: none !important;
+    }
+    
+    .showcase-text,
+    .showcase-visual {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

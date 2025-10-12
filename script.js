@@ -189,6 +189,190 @@ const throttledScroll = throttle(() => {
 
 window.addEventListener('scroll', throttledScroll);
 
-// Custom cursor removed
+// Image scroll animations with parallax and reveal effects
+const imageObserverOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('image-visible');
+        }
+    });
+}, imageObserverOptions);
+
+// Observe all showcase images
+document.querySelectorAll('.showcase-visual img').forEach(img => {
+    imageObserver.observe(img);
+});
+
+// Parallax scroll effect for images
+let ticking = false;
+
+function updateParallax() {
+    const scrolled = window.pageYOffset;
+    
+    document.querySelectorAll('.showcase-visual img').forEach((img, index) => {
+        const rect = img.getBoundingClientRect();
+        const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        
+        if (scrollPercent >= 0 && scrollPercent <= 1) {
+            // Subtle parallax movement
+            const translateY = (scrollPercent - 0.5) * 30;
+            const scale = 0.95 + (scrollPercent * 0.1);
+            
+            img.style.transform = `translateY(${translateY}px) scale(${Math.min(scale, 1.05)})`;
+        }
+    });
+    
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+    }
+});
+
+// Staggered fade-in for feature cards with scale
+document.querySelectorAll('.feature-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(50px) scale(0.95)';
+    
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    entry.target.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                }, index * 100);
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    cardObserver.observe(card);
+});
+
+// Showcase content slide-in animations
+document.querySelectorAll('.showcase-content').forEach((content, index) => {
+    const textElement = content.querySelector('.showcase-text');
+    const visualElement = content.querySelector('.showcase-visual');
+    
+    if (textElement && visualElement) {
+        const showcaseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Slide in from opposite directions
+                    setTimeout(() => {
+                        textElement.style.opacity = '1';
+                        textElement.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        visualElement.style.opacity = '1';
+                        visualElement.style.transform = 'translateX(0) scale(1)';
+                    }, 300);
+                    
+                    showcaseObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        // Set initial states
+        textElement.style.opacity = '0';
+        textElement.style.transform = index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
+        textElement.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        visualElement.style.opacity = '0';
+        visualElement.style.transform = index % 2 === 0 ? 'translateX(50px) scale(0.9)' : 'translateX(-50px) scale(0.9)';
+        visualElement.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        showcaseObserver.observe(content);
+    }
+});
+
+// Image hover effects with 3D tilt
+document.querySelectorAll('.showcase-visual img').forEach(img => {
+    img.addEventListener('mouseenter', function() {
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    img.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    
+    img.addEventListener('mouseleave', function() {
+        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        this.style.transition = 'transform 0.5s ease';
+    });
+});
+
+// Smooth scroll progress indicator
+const progressBar = document.createElement('div');
+progressBar.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease;
+`;
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.pageYOffset / windowHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+});
+
+// Animate showcase features list items
+document.querySelectorAll('.showcase-features li').forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(-20px)';
+    
+    const listObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                }, index * 100);
+                listObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    listObserver.observe(item);
+});
+
+// Hero title animation enhancement
+document.querySelectorAll('.hero-title-line').forEach((line, index) => {
+    line.style.opacity = '0';
+    line.style.transform = 'translateY(30px)';
+    
+    setTimeout(() => {
+        line.style.opacity = '1';
+        line.style.transform = 'translateY(0)';
+        line.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+    }, index * 200 + 300);
+});
 
 console.log('🚀 INARA - Innovation Redefined');
