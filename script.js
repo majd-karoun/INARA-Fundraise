@@ -15,17 +15,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navigation scroll effect
 const nav = document.getElementById('nav');
 let lastScroll = 0;
+const headerHeight = nav.offsetHeight;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
+    // Add/remove scrolled class based on scroll position
     if (currentScroll > 50) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
+        nav.style.transform = 'translateY(0)';
+        return;
+    }
+    
+    // Hide header on scroll down, show on scroll up
+    if (currentScroll > lastScroll && currentScroll > headerHeight) {
+        // Scrolling down
+        nav.style.transform = `translateY(-${headerHeight}px)`;
+    } else {
+        // Scrolling up
+        nav.style.transform = 'translateY(0)';
     }
     
     lastScroll = currentScroll;
+});
+
+// Ensure header is visible when clicking the menu button
+document.querySelector('.hamburger')?.addEventListener('click', () => {
+    nav.style.transform = 'translateY(0)';
 });
 
 // Intersection Observer for animations
@@ -429,26 +447,6 @@ document.querySelectorAll('.showcase-visual img').forEach(img => {
         this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
         this.style.transition = 'transform 0.5s ease';
     });
-});
-
-// Smooth scroll progress indicator
-const progressBar = document.createElement('div');
-progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    width: 0%;
-    z-index: 9999;
-    transition: width 0.1s ease;
-`;
-document.body.appendChild(progressBar);
-
-window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.pageYOffset / windowHeight) * 100;
-    progressBar.style.width = scrolled + '%';
 });
 
 // Animate showcase features list items

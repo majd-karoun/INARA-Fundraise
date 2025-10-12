@@ -303,35 +303,6 @@ body {
     animation-delay: 2s;
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: fadeInUp 0.8s ease 1.2s backwards;
-}
-
-.mouse {
-    width: 26px;
-    height: 40px;
-    border: 2px solid var(--color-black);
-    border-radius: 20px;
-    position: relative;
-}
-
-.wheel {
-    width: 4px;
-    height: 8px;
-    background: var(--color-black);
-    border-radius: 2px;
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scroll 2s ease-in-out infinite;
-}
-
 /* Features Section */
 .features {
     padding: var(--spacing-xl) var(--spacing-md);
@@ -883,15 +854,7 @@ body:not(.loaded) .showcase-visual img {
 }
 
 /* Progress bar styling */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    z-index: 9999;
-    transition: width 0.1s ease;
-}
+/* Removed */
 
 /* Smooth scroll behavior */
 html {
