@@ -1,49 +1,12 @@
-# INARA - Modern Tech Company Website
+# INARA - AR/VR Startup Fundraising
 
-A stunning, modern website design inspired by Apple's minimalist aesthetic, built with vanilla HTML, CSS, and JavaScript.
+Welcome to INARA's investment opportunity page. We're revolutionizing the AR/VR space with cutting-edge technology and innovative solutions.
 
-## Features
+## 🚀 Live Demo
 
-- **Ultra-Modern Design**: Clean, minimalist interface with smooth animations
-- **Glassmorphism Effects**: Beautiful frosted glass effects throughout
-- **Smooth Animations**: Intersection Observer API for scroll-triggered animations
-- **Responsive Design**: Fully responsive across all devices
-- **Performance Optimized**: Lightweight vanilla JavaScript, no frameworks
-- **Interactive Elements**: Hover effects, parallax, and smooth scrolling
+Visit our fundraising page: [inara-fundraise.netlify.app](https://inara-fundraise.netlify.app)
 
-## Design Elements
+## 💡 About INARA
 
-- **Color Scheme**: White primary, Black secondary (Apple-inspired)
-- **Typography**: System fonts for optimal performance
-- **Animations**: Fade-ins, parallax effects, counter animations
-- **Components**: Navigation, Hero, Features, Showcase, Stats, CTA, Footer
-
-## Technologies
-
-- HTML5
-- CSS3 (Custom Properties, Grid, Flexbox)
-- Vanilla JavaScript (ES6+)
-- No dependencies or frameworks
-
-## Getting Started
-
-Simply open `index.html` in your browser. No build process required!
-
-```bash
-open index.html
-```
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Customization
-
-All colors and spacing are defined as CSS custom properties in `:root` for easy customization.
-
----
-
-**INARA** - Innovation Redefined
+INARA is a pioneering AR/VR startup focused on creating immersive experiences that redefine how people interact with digital content. Our technology combines real-time rendering, and intuitive user interfaces to deliver next-generation virtual and augmented reality solutions.
+.
