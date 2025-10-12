@@ -9,4 +9,3 @@ Visit our fundraising page: [inara-fundraise.netlify.app](https://inara-fundrais
 ## 💡 About INARA
 
 INARA is a pioneering AR/VR startup focused on creating immersive experiences that redefine how people interact with digital content. Our technology combines real-time rendering, and intuitive user interfaces to deliver next-generation virtual and augmented reality solutions.
-.
