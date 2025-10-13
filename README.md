@@ -5,5 +5,5 @@ Welcome to INARA's investment opportunity page. We're revolutionizing the AR/VR 
 
 
 
-[ Enter Page](https://inara-fundraise.netlify.app)
+[ Enter Page](https://inara-fundraise.com)
 
