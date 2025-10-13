@@ -29,9 +29,9 @@ window.addEventListener('scroll', () => {
         return;
     }
     
-    // Only hide/show header on scroll for larger screens
+    // Different behavior for small vs large screens
     if (window.innerWidth > 1024) {
-        // Hide header on scroll down, show on scroll up
+        // Large screens: Hide header on scroll down, show on scroll up
         if (currentScroll > lastScroll && currentScroll > headerHeight) {
             // Scrolling down
             nav.style.transform = `translateY(-${headerHeight}px)`;
@@ -40,8 +40,12 @@ window.addEventListener('scroll', () => {
             nav.style.transform = 'translateY(0)';
         }
     } else {
-        // Keep header visible on small screens
-        nav.style.transform = 'translateY(0)';
+        // Small screens: Hide on scroll down, stay hidden
+        if (currentScroll > lastScroll && currentScroll > headerHeight) {
+            // Scrolling down
+            nav.style.transform = `translateY(-${headerHeight}px)`;
+        }
+        // Don't bring it back on scroll up
     }
     
     lastScroll = currentScroll;
