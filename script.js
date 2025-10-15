@@ -493,3 +493,61 @@ document.querySelectorAll('.hero-title-line').forEach((line, index) => {
 });
 
 console.log('🚀 INARA - Innovation Redefined');
+
+// Countdown Timer - 20 days expiration
+function initCountdown() {
+    // Fixed start date: October 15, 2025 at 18:25
+    const startDate = new Date('2025-10-15T18:25:00');
+    
+    // Calculate end date: 20 days from start date
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 20);
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate.getTime() - now;
+        
+        // Calculate time components
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        
+        // Update the DOM
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        
+        if (daysElement && hoursElement && minutesElement) {
+            daysElement.textContent = String(days).padStart(2, '0');
+            hoursElement.textContent = String(hours).padStart(2, '0');
+            minutesElement.textContent = String(minutes).padStart(2, '0');
+        }
+        
+        // If countdown is finished
+        if (distance < 0) {
+            if (daysElement && hoursElement && minutesElement) {
+                daysElement.textContent = '00';
+                hoursElement.textContent = '00';
+                minutesElement.textContent = '00';
+            }
+            const countdownLabel = document.querySelector('.countdown-label');
+            if (countdownLabel) {
+                countdownLabel.textContent = 'Project Funding Has Been Canceled';
+            }
+            clearInterval(countdownInterval);
+        }
+    }
+    
+    // Update countdown immediately
+    updateCountdown();
+    
+    // Update countdown every minute
+    const countdownInterval = setInterval(updateCountdown, 60000);
+}
+
+// Initialize countdown when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCountdown);
+} else {
+    initCountdown();
+}
