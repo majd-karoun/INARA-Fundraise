@@ -14,45 +14,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Navigation scroll effect
 const nav = document.getElementById('nav');
-let lastScroll = 0;
-const headerHeight = nav.offsetHeight;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    // Add/remove scrolled class based on scroll position
+    // Add/remove scrolled class based on scroll position for styling only
     if (currentScroll > 50) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
-        nav.style.transform = 'translateY(0)';
-        return;
     }
     
-    // Different behavior for small vs large screens
-    if (window.innerWidth > 1024) {
-        // Large screens: Hide header on scroll down, show on scroll up
-        if (currentScroll > lastScroll && currentScroll > headerHeight) {
-            // Scrolling down
-            nav.style.transform = `translateY(-${headerHeight}px)`;
-        } else {
-            // Scrolling up
-            nav.style.transform = 'translateY(0)';
-        }
-    } else {
-        // Small screens: Hide on scroll down, stay hidden
-        if (currentScroll > lastScroll && currentScroll > headerHeight) {
-            // Scrolling down
-            nav.style.transform = `translateY(-${headerHeight}px)`;
-        }
-        // Don't bring it back on scroll up
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Ensure header is visible when clicking the menu button
-document.querySelector('.hamburger')?.addEventListener('click', () => {
+    // Keep nav always visible at the top
     nav.style.transform = 'translateY(0)';
 });
 
@@ -197,15 +170,16 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
+// Mobile Menu Toggle - Global function
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+}
+
 // Performance optimization: Throttle scroll events
 function throttle(func, wait) {
     let timeout;
-    // Mobile Menu Toggle
-    function toggleMenu() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
 
     // Close menu when clicking on a nav link
     document.querySelectorAll('.nav-link').forEach(link => {
