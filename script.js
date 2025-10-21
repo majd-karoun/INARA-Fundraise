@@ -12,7 +12,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navigation scroll effect
+// Navigation scroll effect.
 const nav = document.getElementById('nav');
 
 window.addEventListener('scroll', () => {
